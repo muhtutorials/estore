@@ -1,0 +1,30 @@
+services:
+  server:
+    image: estore
+    build: .
+    container_name: server
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/app
+    restart: always
+    depends_on:
+      - db
+      - cache
+  db:
+    image: mysql
+    container_name: db
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: estore
+      MYSQL_USER: igor
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+    restart: always
+  cache:
+    image: redis
+    container_name: cache
+    restart: always
+volumes:
+  db_data:

@@ -1,0 +1,5 @@
+docker compose up -d
+docker logs server --follow
+docker exec -it server sh
+docker exec -it db mysql -u igor -psecret estore
+docker exec -it cache redis-cli
